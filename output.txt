@@ -1,0 +1,33 @@
+Programming Languages : Python, Javascript, C, C++, Java, R
+Frontend Technologies : ReactJS, HTML, CSS, Bootstrap 
+Backend : Flask , FastApi, Django , Node.js, MongoDB, SQLAlchemy (Postgres, SQLite)
+Software Developer    Github    Linkedin
+mbalaji3009@gmail.com 
+Tirunelveli, Tamilnadu
+Balaji M
+SKILLS
+EDUCATION
+Vellore Institute of Technology:                                                       2022 - 2026
+Btech - Computer Science and Engineering
+PROJECTS
+ACMOne :                                                                                                                         June 2024
+ACMOne is an app to manage activities within the ACM-VIT Chapter
+Tech Stack: React Native, FastApi, SQLAlchemy(Postgres)
+Developed and maintained backend services for the React Native application, with additional
+contributions to frontend page implementation. App Link: PlayStore
+Meal Mate :                                                                                                                      April2024
+ACMOne is an app to manage activities within the ACM-VIT Chapter Tech Stack: React Native, Fa
+stApi, SQLAlche
+my(Postgres) Developed and maintained backend services for the React
+ Native application, with additional contributions to frontend page implementation. A
+pp Link: PlayStore
+WORK EXPERIENCE
+Tech Stack: OpenCV, LLMs, Python  GitHub
+Pushpalata Vidya Mandir:                                                                  2018 - 2022
+Higher Secondary education - CBSE
+PUBLICATIONS
+Precision Agriculture using ML (in - Progress)                                        
+STUDENT ORGANIZATIONS 
+Association for Computing Machinery (ACM-VIT)                                 April 2024 - Present
+Member of Core-Committee and Web Development department
+
