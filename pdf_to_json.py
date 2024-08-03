@@ -1,11 +1,11 @@
-import pymupdf
+import PyPDF2
 
-def pdfreader(path_to_pdf):
-    doc = pymupdf.open(path_to_pdf) 
-    out = open("output.txt", "wb") 
-    for page in doc: 
-        text = page.get_text().encode("utf8") 
-        out.write(text) 
-        out.write(bytes((12,)))
-    out.close()
-    return
+def pdfreader(pdf_path, output_txt):
+    with open(pdf_path, 'rb') as pdf_file:
+        pdf_reader = PyPDF2.PdfReader(pdf_file)
+        text = ''
+        for page_num in range(len(pdf_reader.pages)):
+            page = pdf_reader.pages[page_num]
+            text += page.extract_text()
+    with open(output_txt, 'w', encoding='utf-8') as txt_file:
+        txt_file.write(text)

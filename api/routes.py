@@ -26,16 +26,26 @@ async def upload_pdf(file: UploadFile = File(...)):
         raise HTTPException(status_code=500, detail="Failed to save file")
     
     input = file_path
-    pdfreader(input)
+    pdfreader(input,"output.txt")
     f = open("output.txt", "r")
     content = f.read()
 
-    output = query({
-        "inputs": """Functional Resume Sample """ + content + """ From this resume give a list of interview questions considering you are an interviewer. Take into account the projects done and the work experience and ask questions from them.""",
+    output1 = query({
+        "inputs": """Functional Resume Sample """ + content + """ From this resume give a list of interview questions considering you are an interviewer. Only take into account the projects done. Give me 4 questions.""",
+        "parameters": {
+            "return_full_text": False
+        }
+    }) 
+
+    output2 = query({
+        "inputs": """Functional Resume Sample """ + content + """ From this resume give a list of interview questions considering you are an interviewer. Only take into account the work experience. Give me 4 questions.""",
         "parameters": {
             "return_full_text": False
         }
     })
+
+    output = [output1,output2]
+
 
     return output
 
