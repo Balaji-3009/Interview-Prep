@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon" type="x-icon" href="./assets/logo.png">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Proza+Libre:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <link rel="stylesheet" href="./styling/header.css">
+        <link rel="stylesheet" href="./styling/interview.css">
+        <title>Interview Prep</title>
+    </head>
+    <body>
+        <nav id="navbar">
+            <div id="navbar-left-side">
+                <img src="./assets/logo.png" alt="logo" id="navbar-logo">
+            </div>
+            <div id="navbar-right-side">
+                <a href = "#" class="btn btn-lg btn-outline-info">Login</a>
+                <a href = "#" class="btn btn-lg btn-outline-success">Sign Up</a>
+            </div>
+        </nav>
+
+        <div id="mock-interview" data-bs-spy="scroll" data-bs-target="#navbar-example2" data-bs-root-margin="0px 0px -40%" data-bs-smooth-scroll="true" class="scrollspy-example bg-body-tertiary p-3 rounded-2" tabindex="0">
+            <ul id="interview">
+            </ul>
+            <form>
+                <textarea type="text" placeholder="Enter your answer here" id="input-box" autofocus></textarea>
+            </form> 
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script>
+            var questions = [
+                " Can you explain the architecture of the ACMOne app and the role you played in its development?",
+                " How did you ensure the security and scalability of the Meal Mate website while developing the backend?",
+                " Can you walk us through the process of developing the Sight Sync project, including the challenges faced and the solutions implemented?",
+                " Can you explain the project you worked on at Astute? What was your role and what technologies did you use?",
+                " How did you integrate Hugging Face's API with the Flask backend at Astute? Can you explain the process and the benefits of using natural language processing models for product marketing?",
+                " Can you describe your experience as a Backend Developer Intern at Jurident? What technologies did you use and what were some of the challenges you faced during",
+                " Can you tell me about your role in the Association for Computing Machinery (ACM-VIT) and how it has helped you develop your skills as a software developer?",
+                " You mentioned that you are working on a publication titled 'Precision Agriculture using ML'. Can you provide more details about the project, such as the specific machine learning techniques you are using and the potential impact of this technology on the agriculture industry?"
+            ];
+            var answers = [];
+            const inputBox = $("#input-box");
+            const interview = $("#interview");
+            var questionNumber = 0;
+            function addQuestion(){
+                let newQuestion = document.createElement("li");
+                newQuestion.className = "question";
+                newQuestion.innerHTML = "<p>" + questions[questionNumber] + "</p>";
+                interview.append(newQuestion);
+                newQuestion.scrollIntoView();
+                questionNumber++;
+            }
+            function addAnswer(){
+                let answer = inputBox.val();
+                answers.push(answer);
+                inputBox.val("");
+                let newAnswer = document.createElement("li");
+                newAnswer.className = "answer";
+                newAnswer.innerHTML = "<p>" + answer + "</p>";
+                interview.append(newAnswer);
+            }
+            addQuestion();
+            inputBox.on("keyup", function(){
+                if (event.which === 13 && !event.shiftKey){
+                    addAnswer();
+                    if (questionNumber === questions.length){
+                        console.log(answers);
+                        inputBox.off();
+                    }else{
+                        addQuestion();
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>
+<!-- <li class="question">
+    <p>Some Question For Mock Interview</p>
+</li>
+<li class="answer">
+    <p>Answer to the asked question</p>
+</li> -->

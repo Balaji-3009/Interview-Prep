@@ -10,7 +10,7 @@ body{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    height: 10vh;
+    height: 70px;
     margin: 10px;
 }
 
