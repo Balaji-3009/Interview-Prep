@@ -1,0 +1,38 @@
+Programming Languages : Python, Javascript, C, C++, Java, R
+Frontend Technologies : ReactJS, HTML, CSS, Bootstrap 
+Backend : Flask , FastApi, Django , Node.js, MongoDB, SQLAlchemy (Postgres, SQLite)Software Developer    Github    Linkedin
+mbalaji3009@gmail.com 
+Tirunelveli, TamilnaduBalaji M
+SKILLS
+EDUCATION
+Vellore Institute of Technology:                                                       2022 - 2026
+Btech - Computer Science and Engineering
+PROJECTS
+ACMOne :                                                                                                                         June 2024
+ACMOne is an app to manage activities within the ACM-VIT Chapter
+Tech Stack: React Native, FastApi, SQLAlchemy(Postgres)
+Developed and maintained backend services for the React Native application, with additional
+contributions to frontend page implementation. App Link: PlayStore
+Meal Mate :                                                                                                                      April2024
+MealMate is an website to manage orders for canteens in colleges, including both customer and
+employee portal
+Tech Stack: Flask, SQLAlchemy(SQLite), HTML, CSS, Javascript. GitHub
+Developed the complete Backend along with some contributions to frontend integration.
+Sight Sync :                                                                                                                       March 2024
+SightSync is a "Smart Vision Helmet" for visually impaired individuals, powered by a Raspberry Pi
+4. It features real-time perception of the surrounding and text-to-speech responses.
+Tech Stack: OpenCV, LLMs, Python   GitHub
+WORK EXPERIENCE
+Web Developer Intern at Astute                                                              June 2024 - July 2024
+Worked on developing APIs and frontend integration. Integrated Hugging Face's API with
+a Flask backend to automate content generation, leveraging natural language processing
+models for enhanced product marketing
+Tech Stack: Flask, FastApi, SQLAlchemy
+Backend Developer Intern at Jurident                                                     April 2024 - June 2024
+Worked on developing APIs and frontend integration
+Tech Stack: Node.js, ReactJS, MongoDBPushpalata Vidya Mandir:                                                                  2018 - 2022
+Higher Secondary education - CBSE
+PUBLICATIONS
+Precision Agriculture using ML (in - Progress)                                        STUDENT ORGANIZATIONS 
+Association for Computing Machinery (ACM-VIT)                                 April 2024 - Present
+Member of Core-Committee and Web Development department
