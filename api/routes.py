@@ -4,6 +4,7 @@ from pathlib import Path
 from database.session import db_dependency
 from pdf_to_json import pdfreader
 from .mistral import query
+import json
 
 
 router = APIRouter()
@@ -30,23 +31,49 @@ async def upload_pdf(file: UploadFile = File(...)):
     f = open("output.txt", "r")
     content = f.read()
 
+    
     output1 = query({
-        "inputs": """Functional Resume Sample """ + content + """ From this resume give a list of interview questions considering you are an interviewer. Only take into account the projects done. Give me 4 questions.""",
+        "inputs": """Functional Resume Sample """ + content + """ From this resume give a list of interview questions considering you are an interviewer. Only take into account the projects done. Give me 3 questions.""",
         "parameters": {
             "return_full_text": False
         }
     }) 
 
     output2 = query({
-        "inputs": """Functional Resume Sample """ + content + """ From this resume give a list of interview questions considering you are an interviewer. Only take into account the work experience. Give me 4 questions.""",
+        "inputs": """Functional Resume Sample """ + content + """ From this resume give a list of interview questions considering you are an interviewer. Only take into account the work experience. Give me 3 questions.""",
+        "parameters": {
+            "return_full_text": False
+        }
+    })
+    
+    output3 = query({
+        "inputs": """Functional Resume Sample """ + content + """ From this resume give a list of interview questions considering you are an interviewer. Give question from sections except projects and work experience. Give me 2 properly framed questions. This can include their clubs and chapters, publications, extracurricular activities or any other relevant fields""",
         "parameters": {
             "return_full_text": False
         }
     })
 
-    output = [output1,output2]
+    output = []
 
-
+    for qns in output1:
+        out=(qns["generated_text"].split('\n'))
+        for i in out:
+            if len(i)>5:
+                output.append(i[2::])
+                
+        
+    for qns in output2:
+        out=(qns["generated_text"].split('\n'))
+        for i in out:
+            if len(i)>5:
+                output.append(i[2::])
+        
+    for qns in output3:
+        out=(qns["generated_text"].split('\n'))
+        for i in out:
+            if len(i)>5:
+                output.append(i[2::])
+        
     return output
 
 
