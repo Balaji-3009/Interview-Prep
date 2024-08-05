@@ -1,0 +1,72 @@
+div#mock-interview{
+    max-height: 80vh;
+    overflow-y: scroll;
+    background-color: inherit !important;
+}
+
+#interview{
+    width: 80vw;
+    position: relative;
+    left: 10vw;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    list-style-type: none;
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 200;
+    font-style: normal;
+    font-size: 23px;
+}
+
+#interview > li.question{
+    align-self: self-start;
+    padding: 20px;
+    border: 1px solid rgb(150, 150, 150);
+    border-radius: 30px;
+    border-bottom-left-radius: 0px;
+}
+
+#interview > li.answer{
+    align-self: self-end;
+    padding: 20px;
+    /* border: 1px solid rgb(150, 150, 150); */
+    border-radius: 30px;
+    border-bottom-right-radius: 0px;
+    background-color: rgb(70,70,70);
+}
+
+#input-box{
+    resize: none;
+    position: fixed;
+    bottom: 2vh;
+    z-index: 1;
+    width: 90vw;
+    height: 50px;
+    left: 5vw;
+    padding-left: 30px;
+    overflow: hidden;
+    border: none;
+    border-radius: 30px;
+    color: #ffffff;
+    background-color: rgb(90,90,90);
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 200;
+    font-style: normal;
+    font-size: 23px;
+    line-height: 2lh;
+}
+
+#input-box:focus{
+    outline: none;
+}
+
+#input-box::-webkit-input-placeholder {
+    color: #ffffff;
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 200;
+    font-style: normal;
+    font-size: 23px;
+} 
