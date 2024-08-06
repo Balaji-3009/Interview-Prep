@@ -11,15 +11,9 @@ from fastapi.templating import Jinja2Templates
 
 app = FastAPI()
 
-app.mount("/assets", StaticFiles(directory="assets"), name="assets")
+app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
 
-
-@app.get("/items/{id}", response_class=HTMLResponse)
-async def read_item(request: Request, id: str):
-    return templates.TemplateResponse(
-        request=request, name="homepage.html", context={"id": id}
-    )
 
 router = APIRouter()
 
@@ -46,6 +40,14 @@ async def upload_pdf(request: Request, file: UploadFile = File(...)):
     
     pdfreader(file_path, "output.txt")
     
+    
+    return templates.TemplateResponse(
+        "homepage.html", {"request": request, "questions": questions}
+    )
+
+
+@router.get("/chatbot", response_class=HTMLResponse)
+async def chatbot(request: Request):
     with open("output.txt", "r") as f:
         content = f.read()
 
@@ -72,11 +74,6 @@ async def upload_pdf(request: Request, file: UploadFile = File(...)):
             for i in out:
                 if len(i) > 5:
                     questions.append(i[2:])
-
-    return templates.TemplateResponse(
-        "homepage.html", {"request": request, "questions": questions}
-    )
-
-
-
+    print(questions)
+    return templates.TemplateResponse(request=request, name="interview.html", context={"questions": questions})
 
