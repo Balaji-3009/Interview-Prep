@@ -28,21 +28,13 @@
             </ul>
             <form>
                 <textarea type="text" placeholder="Enter your answer here" id="input-box" autofocus></textarea>
+                
             </form> 
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
         <script>
-            var questions = [
-                " Can you explain the architecture of the ACMOne app and the role you played in its development?",
-                " How did you ensure the security and scalability of the Meal Mate website while developing the backend?",
-                " Can you walk us through the process of developing the Sight Sync project, including the challenges faced and the solutions implemented?",
-                " Can you explain the project you worked on at Astute? What was your role and what technologies did you use?",
-                " How did you integrate Hugging Face's API with the Flask backend at Astute? Can you explain the process and the benefits of using natural language processing models for product marketing?",
-                " Can you describe your experience as a Backend Developer Intern at Jurident? What technologies did you use and what were some of the challenges you faced during",
-                " Can you tell me about your role in the Association for Computing Machinery (ACM-VIT) and how it has helped you develop your skills as a software developer?",
-                " You mentioned that you are working on a publication titled 'Precision Agriculture using ML'. Can you provide more details about the project, such as the specific machine learning techniques you are using and the potential impact of this technology on the agriculture industry?"
-            ];
+            var questions = {{qns | safe}};
             var answers = [];
             const inputBox = $("#input-box");
             const interview = $("#interview");

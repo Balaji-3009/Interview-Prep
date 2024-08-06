@@ -42,7 +42,7 @@ async def upload_pdf(request: Request, file: UploadFile = File(...)):
     
     
     return templates.TemplateResponse(
-        "homepage.html", {"request": request, "questions": questions}
+        "homepage.html", {"request": request}
     )
 
 
@@ -75,5 +75,5 @@ async def chatbot(request: Request):
                 if len(i) > 5:
                     questions.append(i[2:])
     print(questions)
-    return templates.TemplateResponse(request=request, name="interview.html", context={"questions": questions})
+    return templates.TemplateResponse("interview.html", {"request": request, "qns":questions})
 
