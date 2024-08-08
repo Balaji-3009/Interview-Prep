@@ -62,6 +62,9 @@
         $('#file-upload').change(function() {
             var file = $('#file-upload')[0].files[0].name;
             $(this).prev('label').text(file);
+            setTimeout(function(){
+                window.location.href='chatbot';
+            }, 5000);
         });
 
         $("#upload-form").submit(function(e) {

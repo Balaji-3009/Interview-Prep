@@ -1,17 +1,16 @@
 from fastapi import FastAPI, File, UploadFile, HTTPException, APIRouter, Depends, Request
 import os
 from pathlib import Path
-from database.session import db_dependency
 from pdf_to_json import pdfreader
 from .mistral import query
 import json
 from fastapi.responses import HTMLResponse
-from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
+from .schema import getAnswers
+from .mistral_scoresheet import score
 
 app = FastAPI()
 
-app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
 
 
@@ -74,6 +73,9 @@ async def chatbot(request: Request):
             for i in out:
                 if len(i) > 5:
                     questions.append(i[2:])
-    print(questions)
     return templates.TemplateResponse("interview.html", {"request": request, "qns":questions})
+
+@router.post("/generate_result")
+async def generate_result(ans: getAnswers):
+    return score(ans.answers)
 
