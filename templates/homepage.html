@@ -74,6 +74,13 @@
             setTimeout(function(){
                 window.location.href = 'chatbot';
             }, 5000);
+            setTimeout(function(){
+                window.location.href = 'chatbot';
+            }, 10000);
+            $(this).prev('label').text(file);
+            $("#upload-form > label").addClass("disabled");
+            $("#upload-form > div").removeClass("d-none");
+            $("#upload-form").submit();
         });
 
         $("#upload-form").submit(function(e) {
