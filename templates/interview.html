@@ -56,6 +56,7 @@
                 newAnswer.className = "answer";
                 newAnswer.innerHTML = "<p>" + answer + "</p>";
                 interview.append(newAnswer);
+                newAnswer.scrollIntoView();
             }
             addQuestion();
             inputBox.on("keyup", function(){
@@ -63,7 +64,8 @@
                     addAnswer();
                     if (questionNumber === questions.length){
                         console.log(answers);
-                        inputBox.off();
+                        inputBox.attr("disabled", true);
+                        inputBox.attr("placeholder", "");
                     }else{
                         addQuestion();
                     }
