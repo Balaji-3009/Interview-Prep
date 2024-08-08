@@ -67,6 +67,13 @@
     <script>
         $('#file-upload').change(function() {
             var file = $('#file-upload')[0].files[0].name;
+            $(this).prev('label').text(file);
+            $("#upload-form > label").addClass("disabled");
+            $("#upload-form > div").removeClass("d-none");
+            $("#upload-form").submit();
+            setTimeout(function(){
+                window.location.href = 'chatbot';
+            }, 5000);
             setTimeout(function(){
                 window.location.href = 'chatbot';
             }, 10000);
@@ -88,11 +95,11 @@
                 contentType: false,
                 processData: false,
                 success: function(response) {
-                    alert('File uploaded successfully!');
+                    return 0;
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
                     alert('File upload failed!');
-                }
+                },
             });
         });
     </script>
