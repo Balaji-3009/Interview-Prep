@@ -34,6 +34,12 @@
                         Upload Resume
                     </label>
                     <input id="file-upload" class="d-none" type="file" accept="application/pdf">
+                    <div class="d-none">
+                        <div class="spinner-border spinner-border-sm" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <span>generating questions</span>
+                    </div>
                 </form>
             </div>
         </div>
@@ -61,10 +67,13 @@
     <script>
         $('#file-upload').change(function() {
             var file = $('#file-upload')[0].files[0].name;
-            $(this).prev('label').text(file);
             setTimeout(function(){
-                window.location.href='chatbot';
-            }, 5000);
+                window.location.href = 'chatbot';
+            }, 10000);
+            $(this).prev('label').text(file);
+            $("#upload-form > label").addClass("disabled");
+            $("#upload-form > div").removeClass("d-none");
+            $("#upload-form").submit();
         });
 
         $("#upload-form").submit(function(e) {
@@ -85,10 +94,6 @@
                     alert('File upload failed!');
                 }
             });
-        });
-
-        $('#file-upload').change(function() {
-            $("#upload-form").submit();
         });
     </script>
 </body>
