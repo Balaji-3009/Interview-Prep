@@ -1,6 +1,9 @@
-div#mock-interview{
+#mock-interview{
+    display: flex;
+    flex-direction: column;
     max-height: 80vh;
     overflow-y: scroll;
+    overflow-x: hidden;
     background-color: inherit !important;
 }
 
@@ -12,7 +15,6 @@ div#mock-interview{
     flex-direction: column;
     gap: 25px;
     list-style-type: none;
-    font-family: "Montserrat", sans-serif;
     font-optical-sizing: auto;
     font-weight: 200;
     font-style: normal;
@@ -22,6 +24,7 @@ div#mock-interview{
 #interview > li.question{
     align-self: self-start;
     padding: 20px;
+    margin-bottom: 30px;
     border: 1px solid rgb(150, 150, 150);
     border-radius: 30px;
     border-bottom-left-radius: 0px;
@@ -30,10 +33,25 @@ div#mock-interview{
 #interview > li.answer{
     align-self: self-end;
     padding: 20px;
-    /* border: 1px solid rgb(150, 150, 150); */
+    margin-bottom: 30px;
     border-radius: 30px;
     border-bottom-right-radius: 0px;
     background-color: rgb(70,70,70);
+}
+
+.spinner{
+    position: relative;
+    left: 10vw;
+    padding-left: 30px;
+    bottom: 0px;
+    order: 9999;
+}
+
+#interview > li.feedback{
+    margin-top: 100px;
+    padding: 30px;
+    border: 1px solid rgb(150, 150, 150);
+    border-radius: 30px;
 }
 
 #input-box{
@@ -50,7 +68,6 @@ div#mock-interview{
     border-radius: 30px;
     color: #ffffff;
     background-color: rgb(90,90,90);
-    font-family: "Montserrat", sans-serif;
     font-optical-sizing: auto;
     font-weight: 200;
     font-style: normal;
@@ -69,4 +86,4 @@ div#mock-interview{
     font-weight: 200;
     font-style: normal;
     font-size: 23px;
-} 
+}
