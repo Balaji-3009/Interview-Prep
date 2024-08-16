@@ -90,7 +90,7 @@
                 let answer = inputBox.val();
                 let feedback = document.createElement("li");
                 feedback.className = "feedback";
-                feedback.innerHTML = "<p>" + content[0].generated_text + "</p>";
+                feedback.innerHTML = "<p>" + content[0][0].generated_text+ content[1][0].generated_text+ content[2][0].generated_text+ content[3][0].generated_text + "</p>";
                 spinner.classList.add("d-none");
                 interview.append(feedback);
                 feedback.scrollIntoView();

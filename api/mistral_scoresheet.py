@@ -22,7 +22,7 @@ def score(input):
         return response.json()
         
     output = query({
-        "inputs": qa_string + "Give me a feedback for my interview question answers and give some points for improvement.",
+        "inputs": qa_string + "Give me a really short feedback for my interview question answers and give some points for improvement.Just provide the points and nothing else. dont use any phrase before the points",
         "parameters": {
             "return_full_text": False
         }

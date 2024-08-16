@@ -77,5 +77,18 @@ async def chatbot(request: Request):
 
 @router.post("/generate_result")
 async def generate_result(ans: getAnswers):
-    return score(ans.answers)
+    ip1 = ans.answers[:2]
+    ip2 = ans.answers[2:4]
+    ip3 = ans.answers[4:6]
+    ip4 = ans.answers[6:]
+    output = []
+    op1 = score(ip1)
+    output.append(op1)
+    op2 = score(ip2)
+    output.append(op2)
+    op3 = score(ip3)
+    output.append(op3)
+    op4 = score(ip4)
+    output.append(op4)
+    return output
 
