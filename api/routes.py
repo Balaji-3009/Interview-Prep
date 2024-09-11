@@ -1,24 +1,22 @@
-from fastapi import FastAPI, File, UploadFile, HTTPException, APIRouter, Depends, Request
-import os
-from pathlib import Path
-from pdf_to_json import pdfreader
+from fastapi import FastAPI, File, UploadFile, HTTPException, APIRouter, Request
+import io
+import fitz  
 from .mistral import query
-import json
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 from .schema import getAnswers
+import os
+from pathlib import Path
+import json
 from .mistral_scoresheet import score
 
 app = FastAPI()
 
 templates = Jinja2Templates(directory="templates")
 
-
 router = APIRouter()
 
-UPLOAD_DIRECTORY = "uploaded_pdfs"
-
-Path(UPLOAD_DIRECTORY).mkdir(parents=True, exist_ok=True)
+pdf_content_storage = {}
 
 @router.get("/pdf", response_class=HTMLResponse)
 async def get_upload_form(request: Request):
@@ -29,27 +27,29 @@ async def upload_pdf(request: Request, file: UploadFile = File(...)):
     if file.content_type != "application/pdf":
         raise HTTPException(status_code=400, detail="Invalid file type. Only PDFs are allowed.")
     
-    file_path = os.path.join(UPLOAD_DIRECTORY, file.filename)
-    
     try:
-        with open(file_path, "wb") as f:
-            f.write(await file.read())
-    except Exception as e:
-        raise HTTPException(status_code=500, detail="Failed to save file")
-    
-    pdfreader(file_path, "output.txt")
-    
-    
-    return templates.TemplateResponse(
-        "homepage.html", {"request": request}
-    )
+        pdf_content = await file.read()
+        pdf_buffer = io.BytesIO(pdf_content)
+        pdf_document = fitz.open(stream=pdf_buffer, filetype="pdf")
+        
+        pdf_output = ""
+        for page in pdf_document:
+            pdf_output += page.get_text()
 
+        pdf_content_storage["pdf_output"] = pdf_output
+
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to process the file: {str(e)}")
+    
+    return templates.TemplateResponse("homepage.html", {"request": request})
 
 @router.get("/chatbot", response_class=HTMLResponse)
 async def chatbot(request: Request):
-    with open("output.txt", "r") as f:
-        content = f.read()
-
+    content = pdf_content_storage.get("pdf_output", None)
+    
+    if content is None:
+        raise HTTPException(status_code=404, detail="No PDF content found. Please upload a PDF first.")
+    
     questions = []
     queries = [
         {
@@ -73,7 +73,7 @@ async def chatbot(request: Request):
             for i in out:
                 if len(i) > 5:
                     questions.append(i[2:])
-    return templates.TemplateResponse("interview.html", {"request": request, "qns":questions})
+    return templates.TemplateResponse("interview.html", {"request": request, "qns": questions})
 
 @router.post("/generate_result")
 async def generate_result(ans: getAnswers):
@@ -91,4 +91,3 @@ async def generate_result(ans: getAnswers):
     op4 = score(ip4)
     output.append(op4)
     return output
-

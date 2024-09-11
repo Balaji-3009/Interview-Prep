@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="dark">
-  <head>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" type="x-icon" href="../static/assets/logo.png">
@@ -12,30 +12,29 @@
     <link rel="stylesheet" href="../static/css/homepage.css">
     <link rel="stylesheet" href="../static/css/footer.css">
     <title>Interview Prep</title>
-  </head>
-  <body>
-      <nav id="navbar">
-          <div id="navbar-left-side">
-              <img src="../static/assets/logo.png" alt="logo" id="navbar-logo">
-          </div>
-          
-      </nav>
+</head>
+<body>
+    <nav id="navbar">
+        <div id="navbar-left-side">
+            <img src="../static/assets/logo.png" alt="logo" id="navbar-logo">
+        </div>
+    </nav>
 
     <div class="px-4 py-5 my-5 text-center">
         <h1 id="title" class="display-5 fw-bold text-body-emphasis proza">Upload Your Resume</h1>
         <div class="col-lg-6 mx-auto">
             <p id="description" class="lead mb-4 montserrat">Upload your resume to begin your mock interview. Make sure to include your skills, projects, work experience, and other important details in the resume.</p>
             <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-                <form id="upload-form">
+                <form id="upload-form" method="post" enctype="multipart/form-data">
                     <label for="file-upload" class="btn btn-lg btn-primary">
                         Upload Resume
                     </label>
                     <input id="file-upload" class="d-none" type="file" accept="application/pdf">
-                    <div class="d-none">
+                    <div class="d-none" id="loading-indicator">
                         <div class="spinner-border spinner-border-sm" role="status">
                             <span class="visually-hidden">Loading...</span>
                         </div>
-                        <span>generating questions</span>
+                        <span>Generating questions</span>
                     </div>
                 </form>
             </div>
@@ -63,21 +62,13 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script>
         $('#file-upload').change(function() {
-            var file = $('#file-upload')[0].files[0].name;
-            $(this).prev('label').text(file);
-            $("#upload-form > label").addClass("disabled");
-            $("#upload-form > div").removeClass("d-none");
-            $("#upload-form").submit();
-            setTimeout(function(){
-                window.location.href = 'chatbot';
-            }, 5000);
-            setTimeout(function(){
-                window.location.href = 'chatbot';
-            }, 10000);
-            $(this).prev('label').text(file);
-            $("#upload-form > label").addClass("disabled");
-            $("#upload-form > div").removeClass("d-none");
-            $("#upload-form").submit();
+            var file = $('#file-upload')[0].files[0];
+            if (file) {
+                $(this).prev('label').text(file.name);
+                $("#upload-form > label").addClass("disabled");
+                $("#loading-indicator").removeClass("d-none");
+                $("#upload-form").submit();
+            }
         });
 
         $("#upload-form").submit(function(e) {
@@ -92,10 +83,14 @@
                 contentType: false,
                 processData: false,
                 success: function(response) {
-                    return 0;
+                    // Redirect to chatbot page after successful upload
+                    window.location.href = 'chatbot';
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
-                    alert('File upload failed!');
+                    console.error("File upload failed: ", textStatus, errorThrown);
+                    alert('File upload failed! ' + textStatus + ": " + errorThrown);
+                    $("#upload-form > label").removeClass("disabled");
+                    $("#loading-indicator").addClass("d-none");
                 },
             });
         });
